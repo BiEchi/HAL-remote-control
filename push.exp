@@ -1,0 +1,10 @@
+#!/usr/bin/expect
+set file [lindex $argv 0]
+
+puts "\n\033\[1;32mYou're now pushing $file to remote.\033\[0m\n"
+spawn scp ./$file "[exec head -n 1 account.key]@hal-login2.ncsa.illinois.edu:~/$file"
+expect "Password:"
+send "[exec tail -n 1 account.key]\n"
+expect "Passcode or option (1-1):"
+send "1\n"
+interact

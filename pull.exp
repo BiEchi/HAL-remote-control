@@ -1,0 +1,10 @@
+#!/usr/bin/expect  
+# you need to install expect first! Try 'sudo apt install expect'
+set dir [lindex $argv 0]
+
+spawn scp "[exec head -n 1 account.key]@hal-login2.ncsa.illinois.edu:~/$dir/*" ./$dir
+expect "Password:"
+send "[exec tail -n 1 account.key]\n"
+expect "Passcode or option (1-1):"
+send "1\n"
+interact
